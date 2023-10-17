@@ -11,8 +11,15 @@ namespace omg
 	template <typename T>
 	void OmegaApp<T>::Run()
 	{
+
+	   mWindow.Create("Game CR", 1000, 800);
+
 		while (mShouldContinue) {
 			OnUpdate();
+
+			mWindow.SwapBuffers();
+			mWindow.PollEvents();
+			
 		}
 	}
 

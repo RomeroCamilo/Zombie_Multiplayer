@@ -16,6 +16,7 @@ elseif(APPLE)
 	add_defintions(-DOMEGA_APPLE)
 endif()
 
+add_subdirectory(glfw)
 add_subdirectory(Omega)
 add_subdirectory(Game_CR)
 

@@ -2,10 +2,12 @@
 
 #include "Utilities.h"
 
+#include "GameWindow.h"
+
 namespace omg
 {
 	template<typename T>
-	class OMEGA_API OmegaApp { /* beaver app class is visible to user of framework */
+	class OmegaApp { /* beaver app class is visible to user of framework */
 
 	public:
 		static void Init();
@@ -21,6 +23,8 @@ namespace omg
 		OmegaApp();
 
 		inline static OmegaApp* sInstance{ nullptr };
+
+		GameWindow mWindow;
 
 		bool mShouldContinue{ true };
 
