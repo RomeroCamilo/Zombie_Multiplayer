@@ -7,7 +7,7 @@
 namespace omg
 {
 	template<typename T>
-	class OmegaApp { /* beaver app class is visible to user of framework */
+	class OmegaApp { 
 
 	public:
 		static void Init();
