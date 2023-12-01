@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "GLFWImplementation.h"
 #include"GLFW/glfw3.h"
+#include "../Utilities.h"
 
 namespace omg {
 
@@ -15,7 +16,16 @@ namespace omg {
 
 	void GLFWImplementation::Create(const std::string& name, int width, int height)
 	{
-		mWindow = glfwCreateWindow(800, 600, "Game_CR", NULL, NULL);
+		mWindow = glfwCreateWindow(width, height, "Game_CR", NULL, NULL);
+
+		if (mWindow == NULL) {
+			OMG_ERROR("Failed to create GLFW window");
+			glfwTerminate();
+			return;
+		}
+
+		glfwMakeContextCurrent(mWindow);
+
 	}
 
 
