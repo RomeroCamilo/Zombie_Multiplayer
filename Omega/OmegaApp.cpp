@@ -7,6 +7,7 @@
 #include "../stbi/stb_image.h"
 
 #include "Shader.h"
+#include "Picture.h"
 
 namespace omg
 {
@@ -35,13 +36,13 @@ namespace omg
 
 		mWindow.Create("Game CR", 1000, 800);
 
-		
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			OMG_ERROR("Failed to initialize GLAD");
 			return;
-	   }
+		}
 
-		
+
 		float vertices[] = {
 			100.f, 100.f, 0.0f, 0.0f,
 			300.f, 100.f, 1.0f, 0.0f,
@@ -77,32 +78,14 @@ namespace omg
 
 		// SHADERS /////
 
-	   omg::Shader shader{ "../Assets/Shaders/DefaultVertexShader.glsl", "../Assets/Shaders/DefaultFragmentShader.glsl" };
-	   shader.SetUniform2Ints("ScreenSize", 1000, 800);
+		omg::Shader shader{ "../Assets/Shaders/DefaultVertexShader.glsl", "../Assets/Shaders/DefaultFragmentShader.glsl" };
+		shader.SetUniform2Ints("ScreenSize", 1000, 800);
 
-	   // Textures /////
+		// Textures / Picture /////
 
-	   unsigned int texture;
-	   glGenTextures(1, &texture);
-	   glBindTexture(GL_TEXTURE_2D, texture);
+		omg::Picture pic{"../Assets/Pictures/test.png"};
 
-	   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	   int width, height, nrChannels;
-	   stbi_set_flip_vertically_on_load(true);
-	   unsigned char* data = stbi_load("../Assets/Pictures/test.png", &width, &height, &nrChannels,0);
-
-	   if (data) {
-		   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		   glGenerateMipmap(GL_TEXTURE_2D);
-	   }
-	   else {
-		   OMG_ERROR("Failed to load a picture from the file!!!");
-	   };
-	   stbi_image_free(data);
-
-	   // PROGRAM RUNNING
+	   // PROGRAM RUNNING ////
 
 	   glEnable(GL_BLEND);
 	   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -115,6 +98,7 @@ namespace omg
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			shader.Bind();
+			pic.Bind();
 
 			glBindVertexArray(VAO);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
