@@ -19,4 +19,14 @@ namespace omg
 	{
 		mImplementation->Bind();
 	}
+
+	int Picture::GetHeight() const
+	{
+		return mImplementation->GetHeight();
+	}
+
+	int Picture::GetWidth() const
+	{
+		return mImplementation->GetWidth();
+	}
 }

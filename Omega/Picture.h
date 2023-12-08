@@ -10,6 +10,8 @@ namespace omg
 	public:
 		Picture(const std::string & picturePath);
 		void Bind();
+		int GetHeight() const;
+		int GetWidth() const;
 
 	private:
 		std::unique_ptr<PictureImplementation> mImplementation;

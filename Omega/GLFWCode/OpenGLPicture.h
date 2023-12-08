@@ -10,12 +10,17 @@ namespace omg
 	public:
 		OpenGLPicture(const std::string& picturePath);
 
+		virtual int GetHeight() const override;
+		virtual int GetWidth() const override;
+
 		~OpenGLPicture();
 
 		void Bind() override;
 
 	private:
 		unsigned int mPictureProgram;
+		int width;
+		int height;
 
 	};
 }

@@ -17,9 +17,10 @@ namespace omg
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		int width, height, nrChannels;
+		int nrChannels;
 		stbi_set_flip_vertically_on_load(true);
 		unsigned char* data = stbi_load(picturePath.c_str(), &width, &height, &nrChannels, 0);
+		std::cout << "Height: " << height << " ";
 
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -29,6 +30,20 @@ namespace omg
 			OMG_ERROR("Failed to load a picture from the file!!!");
 		};
 		stbi_image_free(data);
+	}
+
+	int OpenGLPicture::GetHeight() const
+	{
+		//std::cout << "Height: " << height <<" ";
+
+		return height;
+	}
+
+	int OpenGLPicture::GetWidth() const
+	{
+		//std::cout << "width: " << width << " ";
+
+		return width;
 	}
 
 	OpenGLPicture::~OpenGLPicture()
