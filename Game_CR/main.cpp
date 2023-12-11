@@ -13,23 +13,25 @@ public:
 	virtual void OnUpdate() override {
 		std::cout << "Omega running." << std::endl;
 
-		Draw(x, y, mPic);
+		//Draw(x, y, mPic);
 
-		//Draw(mUnit);
+		Draw(mUnit);
 	}
 
 	
 	void OnKeyPress(const omg::KeyPressed& e) {
 		if (e.GetKeyCode() == OMEGA_KEY_RIGHT)
-			x += 50;
-			//mUnit.UpdateXCoord(50);
+			//x += 50;
+			mUnit.UpdateXCoord(50);
 		else if (e.GetKeyCode() == OMEGA_KEY_LEFT)
-			x -= 50;
-			//mUnit.UpdateXCoord(-50);
+			//x -= 50;
+			mUnit.UpdateXCoord(-50);
 		else if (e.GetKeyCode() == OMEGA_KEY_UP)
-			y += 50;
+			mUnit.UpdateYCoord(50);
+			//y += 50;
 		else if (e.GetKeyCode() == OMEGA_KEY_DOWN)
-			y -= 50;
+			mUnit.UpdateYCoord(-50);
+			//y -= 50;
 		
 	}
 	

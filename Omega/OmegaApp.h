@@ -28,7 +28,8 @@ namespace omg
 
 		void DefaultWindowCloseHandler();
 
-		void Draw(int x, int y, Picture& pic);
+		static void Draw(int x, int y, Picture& pic);
+		static void Draw(Unit& item);
 
 		friend typename T;
 

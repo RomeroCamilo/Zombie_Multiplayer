@@ -88,7 +88,13 @@ namespace omg
 
 	template <typename T>
 	void OmegaApp<T>::Draw(int x, int y, Picture& pic) {
-		mRenderer.Draw(x, y, pic);
+		sInstance->mRenderer.Draw(x, y, pic);
+	}
+
+	template<typename T>
+	void OmegaApp<T>::Draw(Unit& item)
+	{
+		sInstance->mRenderer.Draw(item.mXPosition, item.mYPosition, item.mImage);
 	}
 
 	
