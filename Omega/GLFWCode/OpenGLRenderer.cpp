@@ -20,7 +20,7 @@ namespace omg {
 
 	void OpenGLRenderer::Draw(int x, int y, Picture& pic)
 	{
-
+		
 		
 		float vertices[] = {
 			(float)x, (float)y, 0.0f, 0.0f,
