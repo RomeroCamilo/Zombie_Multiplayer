@@ -39,7 +39,7 @@ public:
 
 private:
 	omg::Picture mPic{ "../Assets/Pictures/test2.png" };
-	omg::Unit mUnit{ "../Assets/Pictures/test2.png", 100, 500 };
+	omg::Unit mUnit{ "../Assets/Pictures/test2.png", 0, 500 };
 
 	int x{ 100 };
 	int y{ 100 };
