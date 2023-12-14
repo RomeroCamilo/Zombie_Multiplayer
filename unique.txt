@@ -1,0 +1,20 @@
+Game: Zombie Multiplayer Game
+
+Description: I have designed a simple multiplayer game where one person plays with one set of keybindings and the other with another set.
+One player plays as the role of a zombie who will chase the other player who plays as a human. The human must avoid collision with the zombie, and if there is collision, the game ends.
+
+Functionality added:
+
+-Collision detection function for when player1 sprite collides with player2 sprite. I tried different collision measurements until i got to something that works fairly.
+
+-Collision detection for when the player's tries to go out of bound with the screen was added.
+
+-Two sprites are drawn onto the screen. A Human sprite and a zombie sprite.
+
+-Replaced hard coded speed with variables to provide easier reading and modifations of speed of the player movements.
+
+-Extra detection for when keyboard detection of what key got pressed. Depending on the set of keys that got pressed, a specific sprite will move. In this case, awsd keys are for the zombie player, and the arrow keys are for the human player.
+
+-  Collision handling function. This function will execute after collision detection function. From here, a new background screen will be drawn displaying 'Game Over'. This is a png image. I then use the thread library and chrono library, that will sleep the program for 2 seconds, and then the program ends, therefore ending the game.
+
+

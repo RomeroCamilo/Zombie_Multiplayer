@@ -22,8 +22,6 @@ public:
 		if (collided == true) {
 			handle_collision();
 		}
-
-		//Draw(0, 500, mPic);
 	}
 
 	/* IDEA MAKE IT A MULTIPLAYER GAME. PLAYER 1 USES KEYBOARD, PLAYER 2 USES AWSD */
@@ -70,7 +68,7 @@ public:
 			mShouldContinue = false;
 		}
 
-		std::chrono::microseconds wait( 500000 );
+		std::chrono::seconds wait( 1 );
 		std::this_thread::sleep_for(wait);
 	}
 	
