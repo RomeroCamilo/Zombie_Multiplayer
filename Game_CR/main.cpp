@@ -14,8 +14,14 @@ public:
 		//std::cout << "Omega running." << std::endl;
 		Draw(0, 0, background);
 
-		Draw(player);
-		Draw(enemy);
+		Draw(player1);
+		Draw(player2);
+
+		check_collision();
+
+		if (collided == true) {
+			handle_collision();
+		}
 
 		//Draw(0, 500, mPic);
 	}
@@ -24,32 +30,48 @@ public:
 	
 	void OnKeyPress(const omg::KeyPressed& e) {
 
-		if (e.GetKeyCode() == OMEGA_KEY_RIGHT) {
-			x += 50;
-			player.UpdateXCoord(50);
-		}
+		if (e.GetKeyCode() == OMEGA_KEY_RIGHT)
+			player1.UpdateXCoord( player1_speed);
 		else if (e.GetKeyCode() == OMEGA_KEY_LEFT)
-			//x -= 50;
-			player.UpdateXCoord(-50);
+			player1.UpdateXCoord( 0 - player1_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_UP)
-			player.UpdateYCoord(50);
-			//y += 50;
+			player1.UpdateYCoord( player1_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_DOWN)
-			player.UpdateYCoord(-50);
-			//y -= 50;
+			player1.UpdateYCoord( 0 - player1_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_D)
-			//x -= 50;
-			enemy.UpdateXCoord(50);
+			player2.UpdateXCoord( player2_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_A)
-			//x -= 50;
-			enemy.UpdateXCoord(-50);
+			player2.UpdateXCoord( 0 - player2_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_W)
-			enemy.UpdateYCoord(50);
-		//y += 50;
+			player2.UpdateYCoord( player2_speed );
 		else if (e.GetKeyCode() == OMEGA_KEY_S)
-			enemy.UpdateYCoord(-50);;
-		//y -= 50;
+			player2.UpdateYCoord( 0 - player2_speed );;
 		
+	}
+
+	/* function that will check whether player has collided with player2*/
+	void check_collision() {
+		if ((std::abs(player1.GetXCoord() - player2.GetXCoord()) <= 40 ) 
+			&& (std::abs(player1.GetYCoord() - player2.GetYCoord()) <= 40 )) {
+			collided = true;
+		}
+	}
+
+	/* if both players collided, draw the end game screen and the game/program will then end in a couple seconds */
+	void handle_collision() {
+
+		secondIteration++;
+
+		Draw(0, 0, gameOver);
+
+		if (secondIteration == 2) {
+			std::chrono::seconds wait( 2 );
+			std::this_thread::sleep_for( wait );
+			mShouldContinue = false;
+		}
+
+		std::chrono::microseconds wait( 500000 );
+		std::this_thread::sleep_for(wait);
 	}
 	
 	
@@ -57,8 +79,13 @@ public:
 private:
 	omg::Picture mPic{ "../Assets/Pictures/zombiee.png" };
 	omg::Picture background{"../Assets/Pictures/background.png" };
-	omg::Unit player{ "../Assets/Pictures/test2.png", 0, 500 };
-	omg::Unit enemy { "../Assets/Pictures/zombiee.png",0, 500 };
+	omg::Picture gameOver{ "../Assets/Pictures/gameover2.png" };
+	omg::Unit player1{ "../Assets/Pictures/character.png", 0, 0 };
+	omg::Unit player2 { "../Assets/Pictures/zombiee.png",0, 500 };
+	bool collided = false; /* storing whether player has collided with player 2 (zombie) */
+	int secondIteration = 0; /* tracking if game over image fully loaded */
+	int player1_speed = 55;
+	int player2_speed = 30;
 
 	int x{ 100 };
 	int y{ 100 };
