@@ -85,7 +85,7 @@ private:
 	bool collided = false; /* storing whether player has collided with player 2 (zombie) */
 	int secondIteration = 0; /* tracking if game over image fully loaded */
 	int player1_speed = 55;
-	int player2_speed = 30;
+	int player2_speed = 25;
 
 	int x{ 100 };
 	int y{ 100 };
