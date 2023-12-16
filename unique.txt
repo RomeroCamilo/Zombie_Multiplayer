@@ -5,9 +5,9 @@ One player plays as the role of a zombie who will chase the other player who pla
 
 Functionality added:
 
--Collision detection function for when player1 sprite collides with player2 sprite. I tried different collision measurements until i got to something that works fairly.
+-Collision detection function for when player1 sprite collides with player2 sprite. I tried different collision measurements until i got to something that works fairly and I also tried different measurements to handle the transparent pixels.
 
--Collision detection for when the player's tries to go out of bound with the screen was added.
+-Collision detection for when the player's tries to go out of bound with the screen was added for x and y coordinates on the screen.
 
 -Two sprites are drawn onto the screen. A Human sprite and a zombie sprite.
 
@@ -15,6 +15,6 @@ Functionality added:
 
 -Extra detection for when keyboard detection of what key got pressed. Depending on the set of keys that got pressed, a specific sprite will move. In this case, awsd keys are for the zombie player, and the arrow keys are for the human player.
 
--  Collision handling function. This function will execute after collision detection function. From here, a new background screen will be drawn displaying 'Game Over'. This is a png image. I then use the thread library and chrono library, that will sleep the program for 2 seconds, and then the program ends, therefore ending the game.
+-Collision handling function. This function will execute after collision detection function. From here, a new background screen will be drawn displaying 'Game Over'. This is a png image. I then use the thread library and chrono library, that will sleep the program for 2 seconds, and then the program ends, therefore ending the game.
 
 
