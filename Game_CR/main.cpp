@@ -25,29 +25,80 @@ public:
 	}
 
 	/* IDEA MAKE IT A MULTIPLAYER GAME. PLAYER 1 USES KEYBOARD, PLAYER 2 USES AWSD */
-	
 	void OnKeyPress(const omg::KeyPressed& e) {
 
-		if (e.GetKeyCode() == OMEGA_KEY_RIGHT)
-			player1.UpdateXCoord( player1_speed);
+		/* PLAYER 1 MOVEMENTS */
+		if (e.GetKeyCode() == OMEGA_KEY_RIGHT) {
+			if (check_Xbounds_right(player1, player1_speed))
+				player1.UpdateXCoord(player1_speed);
+		}
 		else if (e.GetKeyCode() == OMEGA_KEY_LEFT)
-			player1.UpdateXCoord( 0 - player1_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_UP)
-			player1.UpdateYCoord( player1_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_DOWN)
-			player1.UpdateYCoord( 0 - player1_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_D)
-			player2.UpdateXCoord( player2_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_A)
-			player2.UpdateXCoord( 0 - player2_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_W)
-			player2.UpdateYCoord( player2_speed );
-		else if (e.GetKeyCode() == OMEGA_KEY_S)
-			player2.UpdateYCoord( 0 - player2_speed );;
-		
+		{
+			if (check_Xbounds_left(player1, player1_speed))
+				player1.UpdateXCoord(0 - player1_speed);
+		}
+		else if (e.GetKeyCode() == OMEGA_KEY_UP) {
+			if (check_Ybounds_top(player1, player1_speed))
+				player1.UpdateYCoord(player1_speed);
+		}
+		else if (e.GetKeyCode() == OMEGA_KEY_DOWN) {
+			if (check_Ybounds_bottom(player1, player1_speed))
+				player1.UpdateYCoord(0 - player1_speed);
+		}
+		/* PLAYER 2 MOVEMENTS BELOW */
+		else if (e.GetKeyCode() == OMEGA_KEY_D) {
+			if (check_Xbounds_right(player2, player2_speed))
+				player2.UpdateXCoord(player2_speed);
+		}
+		else if (e.GetKeyCode() == OMEGA_KEY_A) {
+			if (check_Xbounds_left(player2, player2_speed))
+				player2.UpdateXCoord(0 - player2_speed);
+		}
+		else if (e.GetKeyCode() == OMEGA_KEY_W) {
+			if (check_Ybounds_top(player2, player2_speed))
+				player2.UpdateYCoord(player2_speed);
+		}
+		else if (e.GetKeyCode() == OMEGA_KEY_S) {
+			if (check_Ybounds_bottom(player2, player2_speed))
+				player2.UpdateYCoord(0 - player2_speed);
+		}
 	}
 
-	/* function that will check whether player has collided with player2*/
+	/* function that is used to check if we are going out of bounds of the screen on the left x coordinate */
+	bool check_Xbounds_left(omg::Unit& player, int speed) {
+		/* if we can still have a valid movement to the left */
+		if (player.GetXCoord() - speed > -200)
+			return true;
+		else
+			return false;
+	}
+
+	/* function that is used to check if we are going out of bounds of the screen on the right x coordinate */
+	bool check_Xbounds_right(omg::Unit& player, int speed) {
+		if (player.GetXCoord() + speed < 800)
+			return true;
+		else
+			return false;
+	}
+
+	/* function that is used to check if we are going out of bounds of the screen on the bottom y coordinate */
+	bool check_Ybounds_bottom(omg::Unit& player, int speed) {
+		/* if we can still have a valid movement to the left */
+		if (player.GetYCoord() - speed > -60)
+			return true;
+		else
+			return false;
+	}
+
+	/* function that is used to check if we are going out of bounds of the screen on the upper y coordinate*/
+	bool check_Ybounds_top(omg::Unit& player, int speed) {
+		if (player.GetYCoord() + speed < 550)
+			return true;
+		else
+			return false;
+	}
+
+	/* function that will check whether player1 has collided with player2*/
 	void check_collision() {
 		if ((std::abs(player1.GetXCoord() - player2.GetXCoord()) <= 40 ) 
 			&& (std::abs(player1.GetYCoord() - player2.GetYCoord()) <= 40 )) {
@@ -62,6 +113,7 @@ public:
 
 		Draw(0, 0, gameOver);
 
+		/* use 2 iterations to confirm drawing for endgame screen has been rendered */
 		if (secondIteration == 2) {
 			std::chrono::seconds wait( 2 );
 			std::this_thread::sleep_for( wait );

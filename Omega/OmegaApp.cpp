@@ -11,7 +11,7 @@ namespace omg
 	template <typename T>
 	OmegaApp<T>::OmegaApp()
 	{
-		mWindow.Create("Game_CR", 1100, 900);
+		mWindow.Create("Game_CR", 1100, 800);
 
 		mRenderer.Init();
 
