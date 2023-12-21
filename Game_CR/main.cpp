@@ -115,7 +115,7 @@ public:
 
 		/* use 2 iterations to confirm drawing for endgame screen has been rendered */
 		if (secondIteration == 2) {
-			std::chrono::seconds wait( 2 );
+			std::chrono::seconds wait( 1 );
 			std::this_thread::sleep_for( wait );
 			mShouldContinue = false;
 		}
